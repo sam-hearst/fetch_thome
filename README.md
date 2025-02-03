@@ -12,15 +12,11 @@ take_home.raw_{{ json_file_name }} \
 gs://json_fetch/{{ json_file_name }}.json
 ```
 
-bq load --autodetect --source_format=NEWLINE_DELIMITED_JSON \
-take_home.raw_brands \
-gs://json_fetch/brands.json
+Loading the data was pretty straightforward however I did need to run a find and replace for all "$". BigQuery categorizes it as a special character and I was not able to load the data with that symbol. In a production setting, that symbol should be removed before even going through the load stage.
 
-Loading the data was pretty straightforward however I did need to run a find and replace for all "$". BigQuery categorizes it as a special character and I was not able to load the data with that symbol. 
+# Building Structured Relational Data Model (Question #1)
 
-# Building Structured Relational Data Model
+Please find the link to my relational data model here. I will speak a little bit about each table and general overview. Firstly this problem seems like a somewhat common pattern of fact vs dimension tables. The Receipts table is the fact table while the Users and Brands are the dimension tables. Additionally I think that a star schema would be a good way of organizing this data. After taking a look at the data I realized that one more table needed to be created. That table is all the information present within the 'rewardsReceiptItemList' key for each receipt. Additionally, the `barcode` column seems to be the way to join brands table into all the others. Therefore, my final data model will have 4 tables: Receipts, Users, Receipt_Items, and Brands.
 
-Please find the link to my relational data model here. I will speak a little bit about each table and general overview. Firstly this problem seems like a somewhat common pattern of fact vs dimension tables. The Receipts table is the fact table while the Users and Brands are the dimension tables. 
-
-After loading the data in, I wanted to clean the receipts table so that it would match the data model. Here is my SQL for that process
+Built those tables in BigQuery and please find my SQL to create those tables in the `transformed` directory.
 
