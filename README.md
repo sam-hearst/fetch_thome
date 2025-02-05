@@ -1,6 +1,6 @@
 # Overview
 
-This is my project for the take home assessment for fetch. I am using Google Cloud Platform and BigQuery as my SQL dialect. All information around my pocesses and the answers to the take home can be found here.
+This is my project for the take home assessment for fetch. I am using Google Cloud Platform and BigQuery as my SQL dialect. All information around my processes and the answers to the take home can be found here.
 
 # Loading data into BigQuery
 
